@@ -3,74 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css" />
-    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Hamere Belay | Portfolio</title>
   </head>
+
   <body>
-    <section class="hero">
+    <!-- Nav bar -->
+    <nav class="nav-bar">
+      <div class="container">
+        <img class="logo" src="./assets/pp.jpg" alt="Logo" />
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
       <div class="hero-content">
         <h1>Hamere Belay</h1>
         <p>
-          Hello,I'm Hamere Belay. I'm a frontend developer and UI/UX designer. I
-          build rly impressive stuff from conept to design then to code.
+          Hello, I'm Hamere Belay. I'm a Frontend Developer and UI/UX Designer.
+          I build impressive digital experiences from concept and design to
+          fully functional code.
         </p>
       </div>
-      <img class="profile" src="/assets/pp.jpg" alt="Hamere Belay" />
+
+      <img class="profile" src="./assets/pp.jpg" alt="Hamere Belay" />
     </section>
 
-    <section class="about">
+    <!-- About Section -->
+    <section class="about" id="about">
       <h2>About Me</h2>
       <p>
-        I'm a student at Addis Ababa University studying Information science.
-        Besides, I'm a passionate frontend developer and UI/UX designer with a
+        I'm a student at Addis Ababa University studying Information Science.
+        Besides, I'm a passionate Frontend Developer and UI/UX Designer with a
         keen eye for detail. I specialize in creating visually appealing and
-        user-friendly web applications. My goal is to deliver high-quality work
-        that exceeds client expectations.
+        user-friendly web applications.
       </p>
     </section>
-    <section class="skills">
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
       <h2>My Skills</h2>
-      <div class="skill-list">
-        <div class="skilzz">HTML</div>
-        <div class="skilzz">JavaScript</div>
-        <div class="skilzz">CSS</div>
-        <div class="skilzz">React</div>
-        <div class="skilzz">Java</div>
+
+      <div class="grid-container">
+        <div class="grid-item">HTML</div>
+        <div class="grid-item">CSS</div>
+        <div class="grid-item">JavaScript</div>
+        <div class="grid-item">React</div>
+        <div class="grid-item">React Native</div>
+        <div class="grid-item">Node.js</div>
+        <div class="grid-item">NestJS</div>
+        <div class="grid-item">Java</div>
+        <div class="grid-item">API Development</div>
       </div>
     </section>
-    <section class="contact">
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
       <h2>Contact Me</h2>
+
       <p>Feel free to reach out if you have any questions or opportunities!</p>
+
       <form
         action="mailto:hamerebelay16@gmail.com"
         method="post"
         enctype="text/plain"
       >
-        <div class="name">
-          <label for="name">Name:</label>
-          <input type="text" name="name" placeholder="Abebe Kebede" />
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Abebe Kebede" />
         </div>
-        <div class="email">
-          <label for="email">Email:</label>
-          <input type="email" name="email" />
+
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="example@email.com"
+          />
         </div>
-        <div class="message">
-          <label for="message">Message:</label>
-          <textarea name="message" placeholder="Your message here"></textarea>
+
+        <div>
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Your message here..."
+          ></textarea>
         </div>
       </form>
+
       <hr />
     </section>
-  </body>
 
-  <footer>
-    <section>
+    <!-- Footer -->
+    <footer>
       <section class="socials">
-        <a href="">telegram</a>
-        <a href="">facebook</a>
-        <a href="">instagram</a>
+        <a href="#">Telegram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
       </section>
-      <p>All rights reserved.@2026</p>
-    </section>
-  </footer>
+
+      <p>© 2026 All Rights Reserved.</p>
+    </footer>
+  </body>
 </html>
