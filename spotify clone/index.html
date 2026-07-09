@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify Clone</title>
+    <link rel="icon" href="./assets/Spotify_logoo.webp" type="image/jpg" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- navigation -->
+    <aside class="nav-bar">
+      <div class="nav-container">
+        <div><i class="fa-solid fa-ellipsis"></i></div>
+        <div class="search-home">
+          <i class="fa-solid fa-house"></i>
+
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              class="search-input"
+              type="text"
+              placeholder="What do you want to play?"
+            />
+
+            <i class="fa-solid fa-folder search-folder"></i>
+          </div>
+        </div>
+        <div class="some-nav">
+          <i class="fa-solid fa-bell"></i>
+          <i class="fa-solid fa-users"></i>
+          <i class="fa-solid fa-circle-user"></i>
+        </div>
+
+        <!-- <div>
+            <i class="fa-regular fa-window-minimize"></i>
+            <i class="fa-regular fa-window-maximize"></i>
+            <i class="fa-regular fa-window-close"></i>
+          </div> -->
+      </div>
+    </aside>
+    <div class="whole-container">
+      <section class="sidebar">
+        <div class="sidebar-container">
+          <i class="fa-solid fa-book-open"></i>
+          <i class="fa-solid fa-circle-plus"></i>
+          <img src="./assets/Library_1.png" alt="library-1" class="library" />
+          <img src="./assets/Library_2.png" alt="library-2" class="library" />
+        </div>
+      </section>
+      <section class="main-container">
+        <!-- Main Content -->
+        <section class="filters">
+          <button class="chip active">All</button>
+          <button class="chip">music</button>
+          <button class="chip">podcast</button>
+        </section>
+
+        <!-- Albums section -->
+        <section class="albums">
+          <h2>Popular Albums and singles</h2>
+          <div class="album-container">
+            <div class="album-item">
+              <img src="./assets/Album-1.png" alt="Album 1" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+            <div class="album-item">
+              <img src="./assets/Album-2.png" alt="Album 2" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+            <div class="album-item">
+              <img src="./assets/Album_3.png" alt="Album 3" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+            <div class="album-item">
+              <img src="./assets/Album_4.png" alt="Album 4" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+            <div class="album-item">
+              <img src="./assets/Album_5.png" alt="Album 5" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+            <div class="album-item">
+              <img src="./assets/Album_6.png" alt="Album 6" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+            <div class="album-item">
+              <img src="./assets/Album_7.png" alt="Album 7" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+            <div class="album-item">
+              <img src="./assets/Album_8.png" alt="Album 8" />
+              <p>Title title</p>
+              <p class="light">Artist name</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Artists section -->
+        <section class="artists">
+          <h2>Popular Artists</h2>
+          <div class="artist-container">
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-1.png"
+                alt="Artist 1"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-2.png"
+                alt="Artist 2"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-3.png"
+                alt="Artist 3"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-4.png"
+                alt="Artist 4"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-5.png"
+                alt="Artist 5"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-6.png"
+                alt="Artist 6"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-7.png"
+                alt="Artist 7"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+            <div class="artist-item">
+              <img
+                src="./assets/Artist-8.png"
+                alt="Artist 8"
+                class="artist-image"
+              />
+              <p>Artist name</p>
+              <p class="light">Artist</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recents section -->
+        <section class="recents">
+          <h2>Recents</h2>
+          <div class="recent-container">
+            <div class="recent-item">
+              <img src="./assets/Recent-1.png" alt="recent 1" />
+              <p>Title title</p>
+              <p>Playlist name</p>
+            </div>
+            <div class="recent-item">
+              <img src="./assets/Recent-2.png" alt="recent 2" />
+              <p>Title title</p>
+              <p>Playlist name</p>
+            </div>
+            <div class="recent-item">
+              <img src="./assets/Recent-3.png" alt="recent 3" />
+              <p>Title title</p>
+              <p>Playlist name</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+    <section class="player">
+      <div class="player-container">
+        <div class="track-info">
+          <img
+            src="./assets/Recent-1.png"
+            alt="Album cover"
+            class="player-poster"
+          />
+          <div class="track-details">
+            <p>Song title</p>
+            <p class="light">Album name</p>
+          </div>
+          <i class="fa-solid fa-circle-plus"></i>
+        </div>
+
+        <div class="player-controls">
+          <i class="fa-solid fa-shuffle"></i>
+          <i class="fa-solid fa-backward-step"></i>
+          <i class="fa-solid fa-play"></i>
+          <i class="fa-solid fa-forward-step"></i>
+          <i class="fa-solid fa-repeat"></i>
+        </div>
+        <div class="player-volume">
+          <i class="fa-solid fa-volume-high"></i>
+          <input type="range" min="0" max="100" value="50" />
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
