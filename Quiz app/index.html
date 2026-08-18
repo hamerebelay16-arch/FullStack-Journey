@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stargazer Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="quiz-container">
+      <header class="quiz-header">
+        <p class="eyebrow">Astronomy</p>
+        <h1>Ready to leave Earth?</h1>
+        <p class="subtitle" id="quiz-subtitle"></p>
+        <div class="score-badge">
+          <span>Orbit record</span>
+          <strong id="highest">—</strong>
+        </div>
+      </header>
+
+      <section id="start-screen">
+        <ul class="start-facts">
+          <li>
+            <span class="fact-label">Mission</span>
+            <strong id="fact-questions"></strong>
+          </li>
+          <li>
+            <span class="fact-label">Countdown</span>
+            <strong id="fact-time"></strong>
+          </li>
+          <li>
+            <span class="fact-label">Glory</span>
+            <strong>Chase the high score</strong>
+          </li>
+        </ul>
+        <button id="startbtn" class="btn btn-primary btn-block" type="button">
+          Launch quiz
+        </button>
+      </section>
+
+      <section id="quiz-screen" class="hide">
+        <div class="quiz-meta">
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+          <div class="meta-row">
+            <p id="progress-text"></p>
+            <div class="timer" id="timer" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <h2 id="question"></h2>
+        <div id="answers"></div>
+
+        <div class="navigation">
+          <button id="nextbtn" class="btn btn-primary" type="button">Next</button>
+        </div>
+      </section>
+
+      <section id="result-screen" class="hide">
+        <p class="result-label">Mission report</p>
+        <p id="final-score"></p>
+        <p id="result-message"></p>
+        <button id="restartbtn" class="btn btn-primary btn-block" type="button">
+          Launch again
+        </button>
+      </section>
+    </main>
+  </body>
+</html>
