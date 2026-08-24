@@ -15,6 +15,9 @@ import {
   flashButton,
   syncTypeStyles,
   toggleAddForm,
+  themebtn,
+  applyTheme,
+  currentTheme,
 } from "./ui.js";
 import {
   retrieveFromLocal,
@@ -23,6 +26,7 @@ import {
   deleteItem,
   addExpense,
   addIncome,
+  saveTheme,
 } from "./storage.js";
 import { totalExpense, totalIncome, balance } from "./calculation.js";
 
@@ -30,6 +34,7 @@ retrieveFromLocal();
 setDefaultDates();
 syncTypeStyles();
 refreshStats();
+applyTheme(currentTheme());
 
 function isValidEntry(entry) {
   return Number.isFinite(entry.amount) && entry.amount > 0 && entry.date !== "";
@@ -49,6 +54,12 @@ function refreshTableIfVisible() {
 
 addToggle.addEventListener("click", () => {
   toggleAddForm();
+});
+
+themebtn.addEventListener("click", () => {
+  const next = currentTheme() === "dark" ? "light" : "dark";
+  applyTheme(next);
+  saveTheme(next);
 });
 
 document.getElementById("entry-type").addEventListener("change", () => {

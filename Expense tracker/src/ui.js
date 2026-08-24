@@ -1,3 +1,4 @@
+export const themebtn = document.getElementById("theme-toggle");
 export const savebtn = document.getElementById("savebtn");
 export const showbtn = document.getElementById("showbtn");
 export const addToggle = document.getElementById("add-toggle");
@@ -36,6 +37,19 @@ function formatDate(iso) {
     day: "numeric",
     year: "numeric",
   });
+}
+
+export function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themebtn.setAttribute(
+    "aria-label",
+    theme === "dark" ? "Switch to light theme" : "Switch to dark theme",
+  );
+  themebtn.setAttribute("aria-pressed", String(theme === "dark"));
+}
+
+export function currentTheme() {
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
 export function setDefaultDates() {

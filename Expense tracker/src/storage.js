@@ -15,6 +15,14 @@ function withIds(items) {
   return { result, changed };
 }
 
+export function saveTheme(theme) {
+  localStorage.setItem("theme", theme);
+}
+
+export function getTheme() {
+  return localStorage.getItem("theme");
+}
+
 export function saveToLocal(type, item) {
   localStorage.setItem(type, JSON.stringify(item));
 }

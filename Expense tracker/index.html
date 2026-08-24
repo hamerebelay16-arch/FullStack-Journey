@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        const saved = localStorage.getItem("theme");
+        const theme =
+          saved ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <script type="module" src="./src/main.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Expense tracker</title>
@@ -20,7 +31,30 @@
             <p>See where your money goes.</p>
           </div>
         </div>
-        <p class="hero-date" id="today-label"></p>
+        <div class="hero-actions">
+          <p class="hero-date" id="today-label"></p>
+          <button
+            type="button"
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Switch to dark theme"
+            aria-pressed="false"
+          >
+            <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M21 14.3A8.5 8.5 0 0 1 9.7 3a7 7 0 1 0 11.3 11.3z"
+              />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" fill="currentColor" />
+              <path
+                fill="currentColor"
+                d="M11 1h2v3h-2V1zm0 19h2v3h-2v-3zM1 11h3v2H1v-2zm19 0h3v2h-3v-2zM3.8 3.8l2.1 2.1-1.4 1.4-2.1-2.1 1.4-1.4zm12.7 12.7 2.1 2.1-1.4 1.4-2.1-2.1 1.4-1.4zM3.8 20.2l1.4-1.4 2.1 2.1-1.4 1.4-2.1-2.1zm12.7-12.7 1.4-1.4 2.1 2.1-1.4 1.4-2.1-2.1z"
+              />
+            </svg>
+          </button>
+        </div>
       </header>
 
       <section class="stats">
