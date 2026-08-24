@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./src/main.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Expense tracker</title>
+  </head>
+  <body>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+
+    <div class="app">
+      <header class="hero">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">ET</div>
+          <div>
+            <h1>Expense Tracker</h1>
+            <p>See where your money goes.</p>
+          </div>
+        </div>
+        <p class="hero-date" id="today-label"></p>
+      </header>
+
+      <section class="stats">
+        <article class="stat-card stat-expense">
+          <span class="stat-label">Expenses</span>
+          <p class="stat-value">
+            <span id="stat-expense">0.00</span>
+            <small>birr</small>
+          </p>
+        </article>
+        <article class="stat-card stat-income">
+          <span class="stat-label">Income</span>
+          <p class="stat-value">
+            <span id="stat-income">0.00</span>
+            <small>birr</small>
+          </p>
+        </article>
+        <article class="stat-card stat-balance">
+          <span class="stat-label">Balance</span>
+          <p class="stat-value">
+            <span id="stat-balance">0.00</span>
+            <small>birr</small>
+          </p>
+        </article>
+      </section>
+
+      <section class="composer">
+        <div class="card card-form add-dropdown" id="add-dropdown">
+          <button type="button" id="add-toggle" class="add-toggle" aria-expanded="false">
+            <span>Add transaction</span>
+            <span class="chevron" aria-hidden="true"></span>
+          </button>
+          <div class="add-panel">
+            <div class="add-panel-inner">
+              <div class="composer-grid">
+                <label for="entry-type">
+                  Type
+                  <select id="entry-type">
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                  </select>
+                </label>
+                <label for="amount">
+                  Amount (birr)
+                  <input
+                    type="number"
+                    name="amount"
+                    id="amount"
+                    min="0"
+                    step="0.01"
+                    placeholder="0.00"
+                  />
+                </label>
+                <label for="description">
+                  Description
+                  <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    placeholder="Lunch, salary..."
+                  />
+                </label>
+                <label for="date">
+                  Date
+                  <input type="date" name="date" id="date" />
+                </label>
+                <button type="button" id="savebtn">Save expense</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ledger">
+        <div class="ledger-head">
+          <div>
+            <h2>Transactions</h2>
+            <p>Your latest income and spending.</p>
+          </div>
+          <button type="button" id="showbtn">Show</button>
+        </div>
+        <div class="display">
+          <div class="display-inner">
+            <table>
+              <thead>
+                <tr>
+                  <th>Amount</th>
+                  <th>Description</th>
+                  <th>Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="displayTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p id="message" class="toast" role="status"></p>
+  </body>
+</html>
