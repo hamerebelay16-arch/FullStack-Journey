@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>MOVIES</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <h1>Looking for movies? You've come to the right spot!</h1>
+      <input type="search" placeholder="Enter movie name" id="search" />
+      <button id="searchbtn">Search</button>
+      <p id="errormessage" hidden></p>
+
+      <div id="spinner" class="spinner" hidden></div>
+      <img src="" alt="" id="poster" />
+
+      <div class="movie-info" id="movie-info" hidden>
+        <p id="title"></p>
+        <p id="year"></p>
+        <p id="genre"></p>
+        <p id="imdbrating"></p>
+        <p id="actors"></p>
+      </div>
+    </div>
+  </body>
+</html>
