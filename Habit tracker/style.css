@@ -1,0 +1,170 @@
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: #e8dfca;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 50px 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  background: #f8f5ef;
+  backdrop-filter: blur(10px);
+
+  border-radius: 24px;
+  padding: 30px;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.15),
+    0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.container h1 {
+  text-align: center;
+  color: #556b2f;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+.subtitle {
+  text-align: center;
+  color: #8a8475;
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+#habit {
+  flex: 1;
+  padding: 14px 18px;
+  border: 2px solid #d6e0c4;
+  border-radius: 14px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+#habit:focus {
+  border-color: #6b8e23;
+  box-shadow: 0 0 10px rgba(107, 142, 35, 0.25);
+}
+
+#enter {
+  border: none;
+  background: #606c38;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+#enter:hover {
+  transform: translateY(-2px);
+  background: #556b2f;
+}
+
+#habit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Habit Card */
+#habit-list > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: #f3efe4;
+  padding: 14px 18px;
+  border-radius: 16px;
+
+  border-left: 5px solid #606c38;
+
+  transition: 0.25s ease;
+}
+
+#habit-list > div:hover {
+  transform: translateX(4px);
+  background: #eef3e4;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #6b8e23;
+}
+
+/* Habit text */
+#habit-list span {
+  flex: 1;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* Buttons */
+#habit-list button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 1.1rem;
+
+  transition: 0.2s ease;
+}
+
+#habit-list button:hover {
+  transform: scale(1.15);
+}
+
+/* Edit Button */
+.edit-btn {
+  color: #556b2f;
+}
+
+/* Delete Button */
+.delete-btn {
+  color: #c0392b;
+}
+
+/* Completed Habit */
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Small screen */
+@media (max-width: 600px) {
+  .input-group {
+    flex-direction: column;
+  }
+
+  #enter {
+    width: 100%;
+  }
+}
+
+#errormessage {
+  color: red;
+  margin: 1rem;
+}
