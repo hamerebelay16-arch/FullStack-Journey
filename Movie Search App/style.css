@@ -47,7 +47,7 @@ body {
 /* Heading */
 
 h1 {
-  color: #dec222;
+  color: #dbde22;
 
   margin-bottom: 1.8rem;
 
@@ -75,7 +75,7 @@ h1 {
 }
 
 #search:focus {
-  border-color: #b69d0d;
+  border-color: #dbde22;
 
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
@@ -86,7 +86,7 @@ h1 {
   border: none;
   border-radius: 12px;
 
-  background: #dec222;
+  background: #dbde22;
   color: #111;
 
   font-weight: bold;
@@ -161,7 +161,7 @@ h1 {
   margin: 2rem auto;
 
   border: 6px solid #333;
-  border-top: 6px solid #ffd700;
+  border-top: 6px solid #dbde22;
 
   border-radius: 50%;
 
