@@ -1,18 +1,33 @@
-export function totalExpense(expenses) {
+export function totalByType(items, type) {
   let sum = 0;
-  for (const exp of expenses) {
-    sum += exp.amount;
+  for (const item of items) {
+    if (item.type === type) sum += item.amount;
   }
   return sum;
-  //   return expenses.reduce((total, expense) => total + expense.amount, 0);
-  //u can also loop thru the array items these way
 }
-export function totalIncome(deposits) {
-  let sum = 0;
-  for (let dep of deposits) sum += dep.amount;
-  return sum;
+
+export function totalExpense(items) {
+  return totalByType(items, "expense");
 }
-export function balance(totalExp, totalInc) {
-  let balance = totalInc - totalExp;
-  return balance;
+
+export function totalIncome(items) {
+  return totalByType(items, "income");
+}
+
+export function totalLoan(items) {
+  return totalByType(items, "loan");
+}
+
+export function totalBorrow(items) {
+  return totalByType(items, "borrow");
+}
+
+/** Cash on hand: income + borrow − expense − loan */
+export function balance(items) {
+  return (
+    totalIncome(items) +
+    totalBorrow(items) -
+    totalExpense(items) -
+    totalLoan(items)
+  );
 }

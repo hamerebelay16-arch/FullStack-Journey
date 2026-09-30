@@ -9,7 +9,11 @@
   --accent-dark: #4338ca;
   --expense: #e11d48;
   --income: #059669;
+  --loan: #d97706;
+  --borrow: #0284c7;
   --radius: 18px;
+  --edit-hover: #eef2ff;
+  --edit-border: #c7d2fe;
   --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   --shadow-hover: 0 18px 40px rgba(15, 23, 42, 0.14);
   --input: #ffffff;
@@ -35,6 +39,10 @@ html[data-theme="dark"] {
   --accent-dark: #6366f1;
   --expense: #fb7185;
   --income: #34d399;
+  --loan: #fbbf24;
+  --borrow: #38bdf8;
+  --edit-hover: rgba(129, 140, 248, 0.14);
+  --edit-border: rgba(129, 140, 248, 0.35);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   --shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.5);
   --input: #0f172a;
@@ -199,8 +207,8 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
   margin-bottom: 18px;
 }
 
@@ -228,7 +236,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
 .stat-value {
   margin: 8px 0 0;
-  font-size: 1.55rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -246,6 +254,14 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
 .stat-income {
   border-top: 4px solid var(--income);
+}
+
+.stat-loan {
+  border-top: 4px solid var(--loan);
+}
+
+.stat-borrow {
+  border-top: 4px solid var(--borrow);
 }
 
 .stat-balance {
@@ -357,9 +373,22 @@ select:focus {
   box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.16);
 }
 
-.add-dropdown.is-income #savebtn {
+.add-dropdown.is-income #savebtn,
+.btn-income {
   background: linear-gradient(180deg, #10b981, var(--income));
   box-shadow: 0 8px 16px rgba(5, 150, 105, 0.25);
+}
+
+.add-dropdown.is-loan #savebtn,
+.btn-loan {
+  background: linear-gradient(180deg, #f59e0b, var(--loan));
+  box-shadow: 0 8px 16px rgba(217, 119, 6, 0.25);
+}
+
+.add-dropdown.is-borrow #savebtn,
+.btn-borrow {
+  background: linear-gradient(180deg, #0ea5e9, var(--borrow));
+  box-shadow: 0 8px 16px rgba(2, 132, 199, 0.25);
 }
 
 .ledger-head h2 {
@@ -405,6 +434,67 @@ input:focus {
   padding: 12px 12px 8px;
 }
 
+.ledger-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: var(--input);
+  color: var(--text);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.icon-btn:hover,
+.icon-btn.is-active {
+  background: var(--edit-hover);
+  border-color: var(--edit-border);
+  color: var(--accent);
+  filter: none;
+}
+
+.filter-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.35s ease, opacity 0.25s ease;
+}
+
+.filter-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.filter-panel-inner {
+  overflow: hidden;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  padding: 4px 12px 14px;
+}
+
+.filter-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.btn-secondary {
+  background: #374151;
+  box-shadow: none;
+}
+
 button {
   font: inherit;
   border: none;
@@ -425,11 +515,6 @@ button:hover {
 
 button:active {
   transform: scale(0.97);
-}
-
-.btn-income {
-  background: linear-gradient(180deg, #10b981, var(--income));
-  box-shadow: 0 8px 16px rgba(5, 150, 105, 0.25);
 }
 
 .btn-flash {
@@ -482,7 +567,9 @@ tbody tr:hover {
 }
 
 .amount-expense,
-.amount-income {
+.amount-income,
+.amount-loan,
+.amount-borrow {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -495,34 +582,95 @@ tbody tr:hover {
   color: var(--income);
 }
 
+.amount-loan {
+  color: var(--loan);
+}
+
+.amount-borrow {
+  color: var(--borrow);
+}
+
 .empty {
   text-align: center;
   color: var(--muted);
   padding: 28px 12px;
 }
 
-.delete-btn {
+.actions-cell {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.edit-btn,
+.delete-btn,
+.save-row-btn,
+.cancel-row-btn {
   width: 36px;
   height: 36px;
   display: grid;
   place-items: center;
   background: transparent;
-  color: var(--expense);
   box-shadow: none;
   padding: 0;
   border: 1px solid transparent;
   border-radius: 10px;
 }
 
-.delete-btn svg {
+.edit-btn,
+.save-row-btn {
+  color: var(--accent);
+}
+
+.delete-btn,
+.cancel-row-btn {
+  color: var(--expense);
+}
+
+.edit-btn svg,
+.delete-btn svg,
+.save-row-btn svg,
+.cancel-row-btn svg {
   display: block;
   pointer-events: none;
 }
 
-.delete-btn:hover {
+.edit-btn:hover,
+.save-row-btn:hover {
+  background: var(--edit-hover);
+  border-color: var(--edit-border);
+  filter: none;
+}
+
+.delete-btn:hover,
+.cancel-row-btn:hover {
   background: var(--delete-hover);
   border-color: var(--delete-border);
   filter: none;
+}
+
+tr.editing td {
+  vertical-align: middle;
+}
+
+.edit-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row-amount,
+.row-description,
+.row-date,
+.row-type {
+  width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--input);
+  color: var(--text);
+  font: inherit;
 }
 
 .row-exit {
@@ -619,6 +767,12 @@ tbody tr:hover {
   }
 }
 
+@media (max-width: 980px) {
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 760px) {
   .hero,
   .ledger-head {
@@ -627,16 +781,23 @@ tbody tr:hover {
   }
 
   .stats,
-  .composer-grid {
+  .composer-grid,
+  .filter-grid {
     grid-template-columns: 1fr;
   }
 
-  .composer-grid button {
+  .composer-grid button,
+  .filter-grid button {
     width: 100%;
   }
 
-  .hero-actions {
+  .hero-actions,
+  .ledger-actions {
     align-self: flex-end;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
   }
 }
 

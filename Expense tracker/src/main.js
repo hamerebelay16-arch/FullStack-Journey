@@ -2,6 +2,11 @@ import {
   savebtn,
   showbtn,
   addToggle,
+  filterToggle,
+  filterType,
+  filterDateMode,
+  filterDate,
+  filterClear,
   table,
   renderTable,
   showMessage,
@@ -15,20 +20,32 @@ import {
   flashButton,
   syncTypeStyles,
   toggleAddForm,
+  toggleFilterPanel,
+  getFilterValues,
+  clearFilters,
   themebtn,
   applyTheme,
   currentTheme,
+  setEditingId,
+  getEditingId,
+  readEditRow,
 } from "./ui.js";
 import {
   retrieveFromLocal,
-  expenses,
-  incomes,
-  deleteItem,
-  addExpense,
-  addIncome,
+  transactions,
+  deleteTransaction,
+  addTransaction,
+  updateTransaction,
+  filterTransactions,
   saveTheme,
 } from "./storage.js";
-import { totalExpense, totalIncome, balance } from "./calculation.js";
+import {
+  totalExpense,
+  totalIncome,
+  totalLoan,
+  totalBorrow,
+  balance,
+} from "./calculation.js";
 
 retrieveFromLocal();
 setDefaultDates();
@@ -41,19 +58,40 @@ function isValidEntry(entry) {
 }
 
 function refreshStats() {
-  const spent = totalExpense(expenses);
-  const earned = totalIncome(incomes);
-  updateStats(spent, earned, balance(spent, earned));
+  updateStats({
+    expense: totalExpense(transactions),
+    income: totalIncome(transactions),
+    loan: totalLoan(transactions),
+    borrow: totalBorrow(transactions),
+    balance: balance(transactions),
+  });
+}
+
+function currentList() {
+  return filterTransactions(getFilterValues());
 }
 
 function refreshTableIfVisible() {
   if (isTableVisible()) {
-    renderTable(expenses, incomes);
+    renderTable(currentList());
   }
 }
 
 addToggle.addEventListener("click", () => {
   toggleAddForm();
+});
+
+filterToggle.addEventListener("click", () => {
+  toggleFilterPanel();
+});
+
+filterType.addEventListener("change", refreshTableIfVisible);
+filterDateMode.addEventListener("change", refreshTableIfVisible);
+filterDate.addEventListener("change", refreshTableIfVisible);
+
+filterClear.addEventListener("click", () => {
+  clearFilters();
+  refreshTableIfVisible();
 });
 
 themebtn.addEventListener("click", () => {
@@ -68,27 +106,59 @@ document.getElementById("entry-type").addEventListener("change", () => {
 
 showbtn.addEventListener("click", () => {
   if (toggleTable()) {
-    renderTable(expenses, incomes);
+    renderTable(currentList());
   }
 });
 
 table.addEventListener("click", (event) => {
-  const deleteBtn = event.target.closest(".delete-btn");
-  if (!deleteBtn) return;
+  const btn = event.target.closest("button[data-action]");
+  if (!btn) return;
 
-  const row = deleteBtn.closest("tr");
-  let finished = false;
-  const finish = () => {
-    if (finished) return;
-    finished = true;
-    deleteItem(deleteBtn.dataset.type, deleteBtn.dataset.id);
-    renderTable(expenses, incomes);
+  const { action, id } = btn.dataset;
+
+  if (action === "edit") {
+    setEditingId(id);
+    renderTable(currentList());
+    return;
+  }
+
+  if (action === "cancel-edit") {
+    setEditingId(null);
+    renderTable(currentList());
+    return;
+  }
+
+  if (action === "save-edit") {
+    const row = btn.closest("tr");
+    const updates = readEditRow(row);
+    if (!isValidEntry(updates)) {
+      showMessage("Enter a valid amount and date.", "error");
+      return;
+    }
+    updateTransaction(id, updates);
+    setEditingId(null);
+    showMessage("Transaction updated.", "success");
     refreshStats();
-  };
+    renderTable(currentList());
+    return;
+  }
 
-  row.classList.add("row-exit");
-  row.addEventListener("animationend", finish, { once: true });
-  setTimeout(finish, 320);
+  if (action === "delete") {
+    if (getEditingId() === id) setEditingId(null);
+    const row = btn.closest("tr");
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      deleteTransaction(id);
+      renderTable(currentList());
+      refreshStats();
+    };
+
+    row.classList.add("row-exit");
+    row.addEventListener("animationend", finish, { once: true });
+    setTimeout(finish, 320);
+  }
 });
 
 savebtn.addEventListener("click", () => {
@@ -99,15 +169,11 @@ savebtn.addEventListener("click", () => {
     return;
   }
 
-  const { type, ...data } = entry;
-  if (type === "income") {
-    addIncome(data);
-    showMessage("Income saved.", "success");
-  } else {
-    addExpense(data);
-    showMessage("Expense saved.", "success");
-  }
-
+  addTransaction(entry);
+  showMessage(
+    entry.type.charAt(0).toUpperCase() + entry.type.slice(1) + " saved.",
+    "success",
+  );
   clearForm();
   flashButton(savebtn);
   refreshStats();
