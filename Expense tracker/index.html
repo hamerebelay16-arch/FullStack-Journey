@@ -15,7 +15,16 @@
       })();
     </script>
     <script type="module" src="./src/main.js"></script>
+    <script>
+      window.setTimeout(() => {
+        if (!window.__etReady) {
+          const el = document.getElementById("boot-error");
+          if (el) el.classList.remove("hide");
+        }
+      }, 1500);
+    </script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <title>Expense tracker</title>
   </head>
   <body>
@@ -96,8 +105,8 @@
       </section>
 
       <section class="composer">
-        <div class="card card-form add-dropdown" id="add-dropdown">
-          <button type="button" id="add-toggle" class="add-toggle" aria-expanded="false">
+        <div class="card card-form add-dropdown is-open" id="add-dropdown">
+          <button type="button" id="add-toggle" class="add-toggle" aria-expanded="true">
             <span>Add transaction</span>
             <span class="chevron" aria-hidden="true"></span>
           </button>
@@ -165,7 +174,7 @@
                 />
               </svg>
             </button>
-            <button type="button" id="showbtn">Show</button>
+            <button type="button" id="showbtn">Hide</button>
           </div>
         </div>
 
@@ -202,7 +211,7 @@
           </div>
         </div>
 
-        <div class="display">
+        <div class="display is-open">
           <div class="display-inner">
             <table>
               <thead>
@@ -221,5 +230,9 @@
     </div>
 
     <p id="message" class="toast" role="status"></p>
+    <p id="boot-error" class="boot-error hide">
+      App scripts did not load. Open this folder with Live Server
+      (not by double-clicking the file), then hard-refresh.
+    </p>
   </body>
 </html>

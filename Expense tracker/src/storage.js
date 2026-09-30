@@ -6,14 +6,25 @@ function createId() {
   return crypto.randomUUID();
 }
 
+function readJsonArray(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw == null || raw === "") return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 function normalizeItem(item, type, fallbackCreatedAt = Date.now()) {
   return {
     id: item.id || createId(),
     type: item.type || type,
-    amount: Number(item.amount),
+    amount: Number(item.amount) || 0,
     description: item.description || "",
     date: item.date || "",
-    createdAt: item.createdAt || fallbackCreatedAt,
+    createdAt: Number(item.createdAt) || fallbackCreatedAt,
   };
 }
 
@@ -30,41 +41,37 @@ function persist() {
 }
 
 export function retrieveFromLocal() {
-  const saved = JSON.parse(localStorage.getItem("transactions"));
+  const saved = readJsonArray("transactions");
+  const legacyExpenses = readJsonArray("expenses");
+  const legacyIncomes = readJsonArray("incomes");
 
-  transactions.length = 0;
-
-  if (Array.isArray(saved) && saved.length > 0) {
-    const base = Date.now();
-    transactions.push(
-      ...saved.map((item, index) =>
-        normalizeItem(
-          item,
-          item.type || "expense",
-          base - (saved.length - index),
-        ),
-      ),
-    );
-    persist();
-    return;
-  }
-
-  const legacyExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
-  const legacyIncomes = JSON.parse(localStorage.getItem("incomes")) || [];
   const legacy = [
-    ...legacyExpenses.map((item) => ({ ...item, type: "expense" })),
-    ...legacyIncomes.map((item) => ({ ...item, type: "income" })),
+    ...legacyExpenses.map((item) => ({ ...item, type: item.type || "expense" })),
+    ...legacyIncomes.map((item) => ({ ...item, type: item.type || "income" })),
   ];
+
+  // Prefer existing transactions; if empty, recover from legacy keys.
+  const source = saved.length > 0 ? saved : legacy;
   const base = Date.now();
 
+  transactions.length = 0;
   transactions.push(
-    ...legacy.map((item, index) =>
-      normalizeItem(item, item.type, base - (legacy.length - index)),
+    ...source.map((item, index) =>
+      normalizeItem(
+        item,
+        item.type || "expense",
+        base - (source.length - index),
+      ),
     ),
   );
 
   persist();
-  LEGACY_KEYS.forEach((key) => localStorage.removeItem(key));
+
+  // Only remove legacy after we have successfully stored something,
+  // or legacy was already empty.
+  if (saved.length > 0 || legacy.length > 0) {
+    LEGACY_KEYS.forEach((key) => localStorage.removeItem(key));
+  }
 }
 
 export function addTransaction(entry) {

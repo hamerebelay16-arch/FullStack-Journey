@@ -72,6 +72,7 @@ function amountClass(type) {
 
 export function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
+  if (!themebtn) return;
   themebtn.setAttribute(
     "aria-label",
     theme === "dark" ? "Switch to light theme" : "Switch to dark theme",
@@ -84,19 +85,22 @@ export function currentTheme() {
 }
 
 export function setDefaultDates() {
-  dateInput.value = todayValue();
-  todayLabel.textContent = new Date().toLocaleDateString(undefined, {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
+  if (dateInput) dateInput.value = todayValue();
+  if (todayLabel) {
+    todayLabel.textContent = new Date().toLocaleDateString(undefined, {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    });
+  }
 }
 
 export function syncTypeStyles() {
+  if (!typeSelect || !savebtn || !addDropdown) return;
   const type = typeSelect.value;
   addDropdown.classList.remove("is-expense", "is-income", "is-loan", "is-borrow");
   addDropdown.classList.add(TYPE_CLASS[type] || "is-expense");
-  savebtn.className = "";
+  savebtn.classList.remove("btn-income", "btn-loan", "btn-borrow");
   if (type === "income") savebtn.classList.add("btn-income");
   if (type === "loan") savebtn.classList.add("btn-loan");
   if (type === "borrow") savebtn.classList.add("btn-borrow");
@@ -104,6 +108,7 @@ export function syncTypeStyles() {
 }
 
 export function toggleAddForm() {
+  if (!addDropdown || !addToggle) return false;
   addDropdown.classList.toggle("is-open");
   const open = addDropdown.classList.contains("is-open");
   addToggle.setAttribute("aria-expanded", String(open));
@@ -111,6 +116,7 @@ export function toggleAddForm() {
 }
 
 export function toggleFilterPanel() {
+  if (!filterPanel || !filterToggle) return false;
   filterPanel.classList.toggle("is-open");
   const open = filterPanel.classList.contains("is-open");
   filterToggle.setAttribute("aria-expanded", String(open));
@@ -120,21 +126,22 @@ export function toggleFilterPanel() {
 
 export function getFilterValues() {
   return {
-    type: filterType.value,
-    dateMode: filterDateMode.value,
-    date: filterDate.value,
+    type: filterType?.value || "all",
+    dateMode: filterDateMode?.value || "any",
+    date: filterDate?.value || "",
   };
 }
 
 export function clearFilters() {
-  filterType.value = "all";
-  filterDateMode.value = "any";
-  filterDate.value = "";
+  if (filterType) filterType.value = "all";
+  if (filterDateMode) filterDateMode.value = "any";
+  if (filterDate) filterDate.value = "";
 }
 
 const numberAnims = new WeakMap();
 
 function animateNumber(el, next) {
+  if (!el) return;
   const start = Number(el.dataset.value || 0);
   const end = Number(next);
   el.dataset.value = String(end);
@@ -161,7 +168,7 @@ export function updateStats(stats) {
   animateNumber(statLoan, stats.loan);
   animateNumber(statBorrow, stats.borrow);
   animateNumber(statBalance, stats.balance);
-  balanceCard.classList.toggle("negative", stats.balance < 0);
+  balanceCard?.classList.toggle("negative", stats.balance < 0);
 }
 
 export function showMessage(text, kind = "") {
