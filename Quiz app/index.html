@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stargazer Quiz</title>
+    <title>Knowledge Bytes — Information Science Study Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -15,36 +15,83 @@
   </head>
   <body>
     <main class="quiz-container">
+      <!-- Top Navigation & Header -->
       <header class="quiz-header">
-        <p class="eyebrow">Astronomy</p>
-        <h1>Ready to leave Earth?</h1>
-        <p class="subtitle" id="quiz-subtitle"></p>
-        <div class="score-badge">
-          <span>Orbit record</span>
-          <strong id="highest">—</strong>
+        <div class="header-top-row">
+          <button id="back-btn" class="back-btn hide" type="button" aria-label="Go Back">
+            ← Back
+          </button>
         </div>
+        <p class="eyebrow" id="quiz-eyebrow">Information Science Department</p>
+        <h1 id="quiz-title">Knowledge Bytes</h1>
+        <p class="subtitle" id="quiz-subtitle">Interactive Quiz & Study Hub</p>
       </header>
 
-      <section id="start-screen">
+      <!-- Screen 0: Landing Page -->
+      <section id="landing-screen">
+        <div class="landing-hero">
+          <p class="hero-description">
+            Master your university courses chapter-by-chapter with interactive quizzes, instant feedback, and chapter score tracking.
+          </p>
+
+          <div class="landing-stats">
+            <div class="stat-card">
+              <span class="stat-icon">📚</span>
+              <strong id="stat-courses">3</strong>
+              <span class="stat-label">Courses</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">📑</span>
+              <strong id="stat-chapters">4</strong>
+              <span class="stat-label">Chapters</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">⚡</span>
+              <strong id="stat-questions">78</strong>
+              <span class="stat-label">Questions</span>
+            </div>
+          </div>
+
+          <button id="explore-btn" class="btn btn-primary btn-block" type="button">
+            Explore Courses & Start Practice →
+          </button>
+        </div>
+      </section>
+
+      <!-- Screen 1: Course Selection -->
+      <section id="course-screen" class="hide">
+        <h2 class="section-heading">Available Courses</h2>
+        <div id="course-list" class="card-grid"></div>
+      </section>
+
+      <!-- Screen 2: Chapter Selection -->
+      <section id="chapter-screen" class="hide">
+        <h2 class="section-heading">Select Chapter</h2>
+        <div id="chapter-list" class="chapter-list"></div>
+      </section>
+
+      <!-- Screen 3: Start Screen -->
+      <section id="start-screen" class="hide">
         <ul class="start-facts">
           <li>
-            <span class="fact-label">Mission</span>
-            <strong id="fact-questions"></strong>
+            <span class="fact-label">Quiz Length</span>
+            <strong id="fact-questions">--</strong>
           </li>
           <li>
-            <span class="fact-label">Countdown</span>
-            <strong id="fact-time"></strong>
+            <span class="fact-label">Timer</span>
+            <strong id="fact-time">--</strong>
           </li>
           <li>
-            <span class="fact-label">Glory</span>
-            <strong>Chase the high score</strong>
+            <span class="fact-label">Target</span>
+            <strong>Aim for 100%</strong>
           </li>
         </ul>
         <button id="startbtn" class="btn btn-primary btn-block" type="button">
-          Launch quiz
+          Start Quiz Now
         </button>
       </section>
 
+      <!-- Screen 4: Active Quiz Screen -->
       <section id="quiz-screen" class="hide">
         <div class="quiz-meta">
           <div class="progress-track" aria-hidden="true">
@@ -52,7 +99,7 @@
           </div>
           <div class="meta-row">
             <p id="progress-text"></p>
-            <div class="timer" id="timer" aria-live="polite"></div>
+            <div class="timer" id="timer" aria-live="polite">20</div>
           </div>
         </div>
 
@@ -60,18 +107,37 @@
         <div id="answers"></div>
 
         <div class="navigation">
-          <button id="nextbtn" class="btn btn-primary" type="button">Next</button>
+          <button id="nextbtn" class="btn btn-primary" type="button">Next Question</button>
         </div>
       </section>
 
+      <!-- Screen 5: Result Screen -->
       <section id="result-screen" class="hide">
-        <p class="result-label">Mission report</p>
+        <p class="result-label">Chapter Summary</p>
         <p id="final-score"></p>
         <p id="result-message"></p>
-        <button id="restartbtn" class="btn btn-primary btn-block" type="button">
-          Launch again
-        </button>
+        <div class="button-group">
+          <button id="restartbtn" class="btn btn-primary btn-block" type="button">
+            Try Chapter Again
+          </button>
+          <button id="change-topic-btn" class="btn btn-secondary btn-block" type="button">
+            Choose Another Course
+          </button>
+        </div>
       </section>
+
+      <!-- Quit Confirmation Modal -->
+      <div id="confirm-modal" class="modal-overlay hide" role="dialog" aria-modal="true">
+        <div class="modal-card">
+          <div class="modal-icon">⚠️</div>
+          <h3 class="modal-title">Quit Current Quiz?</h3>
+          <p class="modal-text">Your progress in this chapter will be lost.</p>
+          <div class="modal-actions">
+            <button id="modal-cancel-btn" class="btn btn-secondary" type="button">Continue Quiz</button>
+            <button id="modal-confirm-btn" class="btn btn-danger" type="button">Quit Quiz</button>
+          </div>
+        </div>
+      </div>
     </main>
   </body>
 </html>
