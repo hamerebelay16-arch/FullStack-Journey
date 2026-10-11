@@ -8,6 +8,7 @@ function Button() {
   const handleclick = (name) => {
     console.log(` Hello ${name}`);
   };
+  // we can also manipulate the target element usng the event e. e.target.style.display=none   ...
   return <button onClick={() => handleclick("Ham")}>Hello</button>;
 }
 export default Button;
