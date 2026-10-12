@@ -1,4 +1,4 @@
-import Button from "./Button.jsx";
+import InputDisplay from "./InputDisplay.jsx";
 function App() {
   // const fruits = [
   //   { id: 1, name: "Apple", calories: 123 },
@@ -20,7 +20,7 @@ function App() {
   //   </>
   // );
 
-  return <Button />;
+  return <InputDisplay />;
 }
 
 export default App;
