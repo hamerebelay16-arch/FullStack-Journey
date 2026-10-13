@@ -2,10 +2,14 @@ import { useState } from "react";
 function Counter() {
   const [count, setCount] = useState(0);
   const Decrement = () => {
-    setCount(count - 1);
+    setCount((c) => c - 1);
+    setCount((c) => c - 1);
+
+    //the above is an example of using an updater function
   };
   const Increment = () => {
-    setCount(count + 1);
+    // setCount(count + 1);   Normal
+    setCount((c) => c + 1); // using updater
   };
   const Reset = () => {
     setCount(0);

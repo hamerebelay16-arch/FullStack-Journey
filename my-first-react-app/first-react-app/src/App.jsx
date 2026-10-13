@@ -1,4 +1,4 @@
-import InputDisplay from "./InputDisplay.jsx";
+import MyUseEffect from "./MyUseEffect.jsx";
 function App() {
   // const fruits = [
   //   { id: 1, name: "Apple", calories: 123 },
@@ -20,7 +20,7 @@ function App() {
   //   </>
   // );
 
-  return <InputDisplay />;
+  return <MyUseEffect />;
 }
 
 export default App;
