@@ -1,4 +1,4 @@
-import MyUseEffect from "./MyUseEffect.jsx";
+import DigitalClock from "./DigitalClock.jsx";
 function App() {
   // const fruits = [
   //   { id: 1, name: "Apple", calories: 123 },
@@ -20,7 +20,7 @@ function App() {
   //   </>
   // );
 
-  return <MyUseEffect />;
+  return <DigitalClock />;
 }
 
 export default App;

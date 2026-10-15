@@ -1,3 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
 /* .card {
   border: 1px solid rgb(196, 195, 195);
   border-radius: 10px;
@@ -207,4 +217,35 @@ h3 {
 
 .btn-delete:hover {
   background: #ffcdd2;
+}
+
+/* ---------------Digital Clock--------------------- */
+
+.clock-wrapper {
+  height: 100vh;
+  width: 100%;
+  background-image: url('./assets/Background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-container {
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 40px 60px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.clock-time {
+  font-size: 80px;
+  font-family: 'Courier New', monospace;
+  color: white;
+  letter-spacing: 6px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(150, 150, 255, 0.4);
 }

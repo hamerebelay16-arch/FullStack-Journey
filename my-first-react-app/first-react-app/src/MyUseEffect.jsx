@@ -5,7 +5,15 @@ function MyUseState() {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    // they say that this code above runs when ever a component renders but isn't useEffect the one that's making it rerender by changing the values of width and height???
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+
+      // this return statement runs before the component rerenders(if no dependencies) or before the component unmounts. It helps clean up the event listener when the component is removed from the DOM
+    };
+  });
+  useEffect(() => {
+    document.title = `(Size: ${width} x ${height})`;
   });
 
   const handleResize = () => {
